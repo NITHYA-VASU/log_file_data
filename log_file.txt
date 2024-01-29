@@ -1,0 +1,175 @@
+clk
+/tools/Tessent_2019.3_NEW/bin/tessent -shell -dofile ./atpg.tcl -logfile atpg.log -replace
+//  Tessent Shell  2019.3    Wed Sep 04 14:17:38 GMT 2019
+//                Copyright 2011-2019 Mentor Graphics Corporation
+//
+//                           All Rights Reserved.
+//
+//    THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH
+//  IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//  Mentor Graphics software executing under x86-64 Linux on Thu Jan 11 13:07:28 IST 2024.
+//  64 bit version
+//  Host: linuxOS (128355 MB RAM, 20475 MB Swap)
+//
+ 
+//  mtnslogicbist_c license will expire in 8 days...
+//  command: set_context patterns -scan
+ 
+//  mtfastscan_c license will expire in 8 days...
+//  command: #read_verilog /workspace/common/hackednetlist
+//  command: #modified netlist
+//  command: read_verilog ./tsdb_outdir/dft_inserted_designs/two_counter_gate.dft_inserted_design/two_counter.vg
+//  command: #open_tsdb ../SCAN/tsdb_outdir/
+//  command: #set_cell_library_options -report_floating_nets on -report_duplicate_models on
+//  command: #atpg library
+//  command: #read_verilog /workspace/tech_lib/dolphin/std_cells/28HPC/dti_tm28hpc_l30_stdcells_rev0p3p0/verilog/dti_tm28hpc_l30_stdcells_rev0p3p0.v 
+//  command: read_cell_library ../library/dti_tm28hpc_l30_stdcells_rev0p3p0.atpg
+//  Reading DFT Library file ../library/dti_tm28hpc_l30_stdcells_rev0p3p0.atpg
+//  Finished reading file ../library/dti_tm28hpc_l30_stdcells_rev0p3p0.atpg
+//  command: #tcd file
+//  command: #read_core_descriptions ./tsdb_outdir/dft_inserted_designs/two_counter_gate.dft_inserted_design/two_counter.tcd
+//  command: #set current design
+//  command: set_current_design two_counter
+//  Note: 2 duplicate cell library models were read. The last model read of the same name was kept.
+//        To see detailed messages per duplicate model, issue 'set_cell_library_options -report_duplicate_models on'
+//        before issuing 'read_cell_library'.
+//  Warning: 2 cell library models contained a total of 2 internal floating nets.
+//           To see detailed messages per model, issue 'set_cell_library_options -report_floating_nets on'
+//           before issuing 'read_cell_library'.
+//  Warning: 6 cases: Unused net in DFT library model
+//  Note: Issue set_current_design with the -show_elaboration_warnings option to see more details about previous warnings
+//  command: #design level
+//  command: set_design_level physical_block
+//  command: #add_black_boxes -auto
+//  command: #set_tied_signals 0
+//  command: #add clocks
+//  command: add_clocks 0 clk1
+//  command: add_clocks 0 clk2
+//  command: add_clocks 0 clk3
+//  command: add_clocks 1 rst_n
+//  command: #add_input_constraints -C1 rst_n
+//  command: #set_output_masks off
+//  command: add_scan_groups grp1 scan.testproc
+//  command: add_scan_chains chain0 grp1 {/ts_si[0]} {/ts_so[0]}
+//  command: add_scan_chains chain1 grp1 {/ts_si[1]} {/ts_so[1]}
+//  command: add_scan_chains chain2 grp1 {/ts_si[2]} {/ts_so[2]}
+//  command: add_scan_chains chain3 grp1 {/ts_si[3]} {/ts_so[3]}
+//  command: add_scan_chains chain4 grp1 {/ts_si[4]} {/ts_so[4]}
+//  command: add_scan_chains chain5 grp1 {/ts_si[5]} {/ts_so[5]}
+//  command: add_scan_chains chain6 grp1 {/ts_si[6]} {/ts_so[6]}
+//  command: #set_fault_sampling 1
+//  command: check_design_rules 
+//  Flattening process completed, cell instances=412, gates=1830, PIs=14, POs=157, CPU time=0.01 sec.
+//  ---------------------------------------------------------------------------
+//  Begin circuit learning analyses.
+//  --------------------------------
+//  Learning completed, CPU time=0.00 sec.
+//  ---------------------------------------------------------------------------
+//  Begin scan chain identification process, memory elements = 159.
+//  ---------------------------------------------------------------------------
+//  Reading group test procedure file scan.testproc.
+//  Begin simulation of load_unload procedure.
+//  Simulation of load_unload procedure completed, CPU time=0.0 sec.
+//  Chain = chain0 successfully traced with scan_cells = 22.
+//  Chain = chain1 successfully traced with scan_cells = 22.
+//  Chain = chain2 successfully traced with scan_cells = 22.
+//  Chain = chain3 successfully traced with scan_cells = 21.
+//  Chain = chain4 successfully traced with scan_cells = 21.
+//  Chain = chain5 successfully traced with scan_cells = 21.
+//  Chain = chain6 successfully traced with scan_cells = 21.
+//  150 scan cells have been identified in 7 scan chains.
+//  Longest scan chain has 22 scan cells.
+    reset_name                              rst_n
+//  Warning: 50 edge-triggered clock ports set to stable high. (D7)
+//  ---------------------------------------------------------------------------
+//  Begin transparent latch checking for 9 latches.
+//  ---------------------------------------------------------------------------
+//  Number transparent latches = 9.
+    Set_current_design                      two_counters 
+//  ---------------------------------------------------------------------------
+//  Begin scan clock rules checking.
+    clk_name                                clk1,clk2,clk3
+//  ---------------------------------------------------------------------------
+//  4 scan clock/set/reset lines have been identified.
+//  All scan clocks successfully passed off-state check.
+//  ---------------------------------------------------------------------------
+//  9 non-scan memory elements are identified.
+//  ---------------------------------------------------------------------------
+//  9 non-scan memory elements are identified as TLA. (D5)
+//  ---------------------------------------------------------------------------
+//  command: #dofile ../SCAN/scan_verify_scan_modes.dofile
+//  command: set_fault_type stuck
+//  command: add_faults -all
+//  command: create_patterns 
+// | ------------------------------------------------------------------------------------------------------------------ |
+// |                                             Analyzing the design                                                   |
+// |                                                                                                                    |
+// |      Current clock restriction setting:     Domain_clock (edge interaction)                                        |
+// |                                             (optimal)                                                              |
+// |                                                                                                                    |
+// |          Current split capture setting:     Off (optimal)                                                          |
+// |                                                                                                                    |
+// |   Current clock off simulation setting:     Off (optimal)                                                          |
+// |                                                                                                                    |
+// |            Current abort limit setting:     30                                                                     |
+// |                                Calling:     set_abort_limit 300 100                                                |
+// | ------------------------------------------------------------------------------------------------------------------ |
+// |                                                                                                                    |
+// |               Current sequential depth:     0                                                                      |
+// |               Optimal sequential depth:     2                                                                      |
+// |                                Calling:     set_pattern_type -sequential 2                                         |
+// |                                                                                                                    |
+// | ------------------------------------------------------------------------------------------------------------------ |
+//  ------------------------------------------------------------------------
+//  Simulation performed for #gates = 1830  #faults = 2706
+//  system mode = analysis    pattern source = internal patterns
+//  ------------------------------------------------------------------------
+//  #patterns  test      #faults  #faults    # eff.    # test         process      RE/AU/AAB
+//  simulated  coverage  in list  detected   patterns  patterns       CPU time
+//  deterministic ATPG invoked with comb/seq abort limit = 300/100
+//   ---        ------      ---       ---      ---       ---          0.35 sec     0/7/0
+//   64         98.87%       37      2662       48        48          0.37 sec
+//   ---        ------      ---       ---      ---       ---          0.37 sec     0/9/0
+//   76         99.77%        0        35       12        60          0.37 sec
+ 
+              Statistics Report             
+               Stuck-at Faults              
+--------------------------------------------
+Fault Classes                     #faults   
+                                  (total)   
+----------------------------  --------------
+  FU (full)                        3892     
+  --------------------------  --------------
+  DS (det_simulation)          2697 (69.30%)
+  DI (det_implication)         1173 (30.14%)
+  UU (unused)                     2 ( 0.05%)
+  TI (tied)                       3 ( 0.08%)
+  BL (blocked)                    8 ( 0.21%)
+  AU (atpg_untestable)            9 ( 0.23%)
+--------------------------------------------
+Coverage                                    
+  --------------------------                
+  test_coverage                      99.77% 
+  fault_coverage                     99.43% 
+  atpg_effectiveness                100.00% 
+--------------------------------------------
+#test_patterns                           60 
+  #basic_patterns                        55 
+  #clock_sequential_patterns              5 
+#simulated_patterns                      76 
+CPU_time (secs)                        17.3 
+--------------------------------------------
+number_of_clk                           3
+number_of_reset                         1
+test*patterns                           60 
+longest_scan_chain                      22 
+total_number_of_scan_chain              7
+current_sequential_depth                0
+optimal_sequential_depth                2 
+current_abort_limit_setting             30
+number_of_non_scan_memory_elements      9
+ 
+//  command: #write_patterns ../simu_chain_test/chain_test_parallel_transition.v -pattern_sets chain -parallel -verilog -replace
+//  command: #write_patterns ../simu_chain_test/chain_test_serial.v -pattern_sets chain -serial -verilog -replace
